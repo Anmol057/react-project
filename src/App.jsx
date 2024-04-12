@@ -2,17 +2,17 @@ import { CORE_CONCEPTS } from "./data.js";
 import Header from "./components/Header/Header.jsx";
 import CoreConcept from "./components/CoreConcept.jsx";
 import TabButton from "./components/Header/TabButton.jsx";
+import { useState } from "react";
 
 function App() {
-  let tabContent = "Please click a button";
+  const [selectedButton, setSelectedButton] = useState("Please click a button");
 
   function handleSelect(button) {
-    console.log("Hello " + button);
-    tabContent = button;
-    console.log(tabContent + " clicked");
-    // Now here we are updating tabContent value on every button clicked but its value is changed and can be seen in the console but
-    // On line 48 in the returned jsx content it stays Same, value is not changing in the UI, Reason is react renders all components
-    // once only in the beginnng unless specified again.
+    setSelectedButton(button);
+    console.log(selectedButton);
+    // Now interesting thing here is our UI shows the correct updated value but console is printing old value of selected Button
+    // Reason for this happening is react schedule the execution of components again but before re-execution it completes the
+    // current function execution which still contains the old value
   }
 
   return (
@@ -46,7 +46,7 @@ function App() {
             <TabButton onSelect={() => handleSelect("State")}>State</TabButton>
           </menu>
         </section>
-        {tabContent}
+        {selectedButton}
       </main>
     </div>
   );
