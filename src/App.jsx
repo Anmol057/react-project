@@ -4,8 +4,15 @@ import CoreConcept from "./components/CoreConcept.jsx";
 import TabButton from "./components/Header/TabButton.jsx";
 
 function App() {
+  let tabContent = "Please click a button";
+
   function handleSelect(button) {
     console.log("Hello " + button);
+    tabContent = button;
+    console.log(tabContent + " clicked");
+    // Now here we are updating tabContent value on every button clicked but its value is changed and can be seen in the console but
+    // On line 48 in the returned jsx content it stays Same, value is not changing in the UI, Reason is react renders all components
+    // once only in the beginnng unless specified again.
   }
 
   return (
@@ -39,6 +46,7 @@ function App() {
             <TabButton onSelect={() => handleSelect("State")}>State</TabButton>
           </menu>
         </section>
+        {tabContent}
       </main>
     </div>
   );
