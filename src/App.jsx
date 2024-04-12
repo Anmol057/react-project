@@ -1,18 +1,15 @@
-import { CORE_CONCEPTS } from "./data.js";
+import { CORE_CONCEPTS, EXAMPLES } from "./data.js";
 import Header from "./components/Header/Header.jsx";
 import CoreConcept from "./components/CoreConcept.jsx";
 import TabButton from "./components/Header/TabButton.jsx";
 import { useState } from "react";
 
 function App() {
-  const [selectedButton, setSelectedButton] = useState("Please click a button");
+  const [selectedButton, setSelectedButton] = useState("components");
 
   function handleSelect(button) {
     setSelectedButton(button);
-    console.log(selectedButton);
-    // Now interesting thing here is our UI shows the correct updated value but console is printing old value of selected Button
-    // Reason for this happening is react schedule the execution of components again but before re-execution it completes the
-    // current function execution which still contains the old value
+    //console.log(selectedButton);
   }
 
   return (
@@ -36,15 +33,22 @@ function App() {
         <section id="examples">
           <h2>Examples</h2>
           <menu>
-            <TabButton onSelect={() => handleSelect("Components")}>
+            <TabButton onSelect={() => handleSelect("components")}>
               Components
             </TabButton>
             {/* We used an anonymous function here so that handleSelect function
             can be passed with an argument. */}
-            <TabButton onSelect={() => handleSelect("JSX")}>JSX</TabButton>
-            <TabButton onSelect={() => handleSelect("Props")}>Props</TabButton>
-            <TabButton onSelect={() => handleSelect("State")}>State</TabButton>
+            <TabButton onSelect={() => handleSelect("jsx")}>JSX</TabButton>
+            <TabButton onSelect={() => handleSelect("props")}>Props</TabButton>
+            <TabButton onSelect={() => handleSelect("state")}>State</TabButton>
           </menu>
+          <div id="tab-content">
+            <h3>{EXAMPLES[selectedButton].title}</h3>
+            <p>{EXAMPLES[selectedButton].description}</p>
+            <pre>
+              <code>{EXAMPLES[selectedButton].code}</code>
+            </pre>
+          </div>
         </section>
         {selectedButton}
       </main>
