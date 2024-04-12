@@ -5,7 +5,7 @@ import TabButton from "./components/Header/TabButton.jsx";
 import { useState } from "react";
 
 function App() {
-  const [selectedButton, setSelectedButton] = useState("components");
+  const [selectedButton, setSelectedButton] = useState();
 
   function handleSelect(button) {
     setSelectedButton(button);
@@ -36,21 +36,21 @@ function App() {
             <TabButton onSelect={() => handleSelect("components")}>
               Components
             </TabButton>
-            {/* We used an anonymous function here so that handleSelect function
-            can be passed with an argument. */}
             <TabButton onSelect={() => handleSelect("jsx")}>JSX</TabButton>
             <TabButton onSelect={() => handleSelect("props")}>Props</TabButton>
             <TabButton onSelect={() => handleSelect("state")}>State</TabButton>
           </menu>
-          <div id="tab-content">
-            <h3>{EXAMPLES[selectedButton].title}</h3>
-            <p>{EXAMPLES[selectedButton].description}</p>
-            <pre>
-              <code>{EXAMPLES[selectedButton].code}</code>
-            </pre>
-          </div>
+          {!selectedButton ? <p>Please select a button</p> : null}
+          {selectedButton ? (
+            <div id="tab-content">
+              <h3>{EXAMPLES[selectedButton].title}</h3>
+              <p>{EXAMPLES[selectedButton].description}</p>
+              <pre>
+                <code>{EXAMPLES[selectedButton].code}</code>
+              </pre>
+            </div>
+          ) : null}
         </section>
-        {selectedButton}
       </main>
     </div>
   );
