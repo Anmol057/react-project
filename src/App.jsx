@@ -2,18 +2,17 @@ import { CORE_CONCEPTS, EXAMPLES } from "./data.js";
 import Header from "./components/Header/Header.jsx";
 import CoreConcept from "./components/CoreConcept.jsx";
 import TabButton from "./components/Header/TabButton.jsx";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 
 function App() {
   const [selectedButton, setSelectedButton] = useState();
 
   function handleSelect(button) {
     setSelectedButton(button);
-    //console.log(selectedButton);
   }
 
   return (
-    <div>
+    <Fragment>
       <main>
         <h2>Time to get started!</h2>
         <Header />
@@ -23,14 +22,6 @@ function App() {
             {CORE_CONCEPTS.map((conceptItem) => (
               <CoreConcept key={conceptItem.title} {...conceptItem} />
             ))}
-            {/* <CoreConcept
-              title={CORE_CONCEPTS[0].title}
-              description={CORE_CONCEPTS[0].description}
-              image={CORE_CONCEPTS[0].image}
-            />
-            <CoreConcept {...CORE_CONCEPTS[1]} />
-            <CoreConcept {...CORE_CONCEPTS[2]} />
-            <CoreConcept {...CORE_CONCEPTS[3]} /> */}
           </ul>
         </section>
         <section id="examples">
@@ -73,7 +64,7 @@ function App() {
           ) : null}
         </section>
       </main>
-    </div>
+    </Fragment>
   );
 }
 
