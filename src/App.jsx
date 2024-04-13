@@ -12,7 +12,7 @@ function App() {
   }
 
   return (
-    <Fragment>
+    <>
       <main>
         <h2>Time to get started!</h2>
         <Header />
@@ -64,7 +64,7 @@ function App() {
           ) : null}
         </section>
       </main>
-    </Fragment>
+    </>
   );
 }
 
